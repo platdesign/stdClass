@@ -15,7 +15,7 @@
 
 	var extend = function(obj) {
 		var sources = Array.prototype.slice.call(arguments, 1);
-		for(s in sources) {
+		for(var s in sources) {
 			var source = sources[s];
 			for (var prop in source) {
 				obj[prop] = source[prop];
@@ -26,8 +26,8 @@
 
 
 	var stdClass = function(){};
+
 		stdClass.extend = function(protoProps, staticProps) {
-		
 			var parent = this;
 			var child;
 
@@ -40,6 +40,7 @@
 				child = function(){ return parent.apply(this, arguments); };
 			}
 
+
 			// Add static properties to the constructor function, if supplied.
 			extend(child, parent, staticProps);
 
@@ -47,8 +48,8 @@
 			// `parent`'s constructor function.
 			var Surrogate = function(){ this.constructor = child; };
 			Surrogate.prototype = parent.prototype;
-			child.prototype = new Surrogate;
-				
+			child.prototype = new Surrogate();
+
 			// Add prototype properties (instance properties) to the subclass,
 			// if supplied.
 			if (protoProps) extend(child.prototype, protoProps);
@@ -56,32 +57,10 @@
 			// Set a convenience property in case the parent's prototype is needed
 			// later.
 			child.__super__ = parent.prototype;
-				
 			return child;
 		};
-
-
-		stdClass.withEvents = stdClass.extend({
-			on:function(eventname, closure){
-				var events = this.events || (this.events = {});
-				var event = events[eventname] || (events[eventname] = []);
-				event.push(closure);
-				return this;
-			},
-			trigger:function(eventname) {
-				var events = this.events || (this.events = {});
-				var event = events[eventname] || (events[eventname] = []);
-				
-				var args = [].splice.call(arguments,0);
-				var newArgs = args.splice(1,1);
-				
-				for(i in event) {
-					var closure = event[i];
-					closure.apply(this, newArgs);
-				}
-				return this;
-			}
-		});
-
+		stdClass.helper = {
+			extend:extend
+		};
 	return stdClass;
 }));
