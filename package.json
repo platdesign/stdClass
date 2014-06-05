@@ -1,6 +1,6 @@
 {
     "name": "stdclass",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "A base class for Javascript",
     "main":"dist/stdClass.js",
     "keywords": [
