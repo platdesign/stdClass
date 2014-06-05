@@ -2,6 +2,7 @@
     "name": "stdClass",
     "version": "0.0.1",
     "description": "A base class for Javascript",
+    "main":"dist/stdClass.js",
     "keywords": [
         "PDF",
         "FPDF"
