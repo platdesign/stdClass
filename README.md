@@ -35,3 +35,7 @@ Get in touch: [mail@platdesign.de](mailto:mail@platdesign.de) or [@platdesign](h
 
 
 
+
+
+
+[![Analytics](https://ga-beacon.appspot.com/UA-54136231-1/stdClass/readme)](https://github.com/igrigorik/ga-beacon)
